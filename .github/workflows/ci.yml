@@ -1,0 +1,23 @@
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request: { branches: [main] }
+jobs:
+  import-check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: { python-version: ["3.10", "3.12"] }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "${{ matrix.python-version }}" }
+      - run: pip install -r requirements.txt
+      - name: import every Utils module
+        run: |
+          python - <<'PY'
+          import importlib, pkgutil
+          import Utils
+          for m in pkgutil.iter_modules(Utils.__path__):
+              importlib.import_module(f"Utils.{m.name}")
+              print("ok:", m.name)
+          PY
