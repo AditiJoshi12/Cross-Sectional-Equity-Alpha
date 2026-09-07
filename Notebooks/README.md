@@ -29,9 +29,4 @@ can re-run any stage without repeating the slow ones above it.
    Sharpe-by-year, the three-panel equity-curve figure, paper-trading signal generation,
    and the headline net Sharpe. Saves figures to `Results/`.
 
-All five `chdir` to the repo root on startup, so `Utils/` imports and `Data/` paths
-resolve no matter where Jupyter was launched from.
-
-> `alpha_backtest.ipynb` is the original monolith that notebooks 2–5 were carved out of.
-> It's kept for reference (its committed outputs back the numbers in the top-level README)
-> but is superseded by the split — you don't need to run it.
+> `alpha_backtest.ipynb` is the original notebook. Other notebooks are refactored from the same.
